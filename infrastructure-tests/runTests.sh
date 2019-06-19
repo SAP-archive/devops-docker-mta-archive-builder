@@ -15,29 +15,17 @@ set -x
 
 # Start a local registry, to which we push the images built in this test, and from which they will be consumed in the test
 docker run -d -p 5000:5000 --restart always --name registry registry:2 || true
-find ../cx-server-companion -type f -exec sed -i -e 's/ppiper/localhost:5000\/ppiper/g' {} \;
+find ../cx-server-companion -type f -exec sed -i -e 's/ppiper\/mta-archive-builder/localhost:5000\/ppiper\/mta-archive-builder/g' {} \;
 
 # Copy over life cycle script for testing
 cp ../cx-server-companion/life-cycle-scripts/{cx-server,server.cfg} .
 mkdir -p jenkins-configuration
 cp testing-jenkins.yml jenkins-configuration
 
-docker build -t localhost:5000/ppiper/jenkins-master:latest ../jenkins-master
-docker build -t localhost:5000/ppiper/cx-server-companion:latest ../cx-server-companion
-docker build -t localhost:5000/ppiper/cf-cli ../cf-cli
-docker build -t localhost:5000/ppiper/neo-cli ../neo-cli
 docker build -t localhost:5000/ppiper/mta-archive-builder ../mta-archive-builder
 
-docker tag localhost:5000/ppiper/jenkins-master:latest ppiper/jenkins-master:latest
-docker tag localhost:5000/ppiper/cx-server-companion:latest ppiper/cx-server-companion:latest
-docker tag localhost:5000/ppiper/cf-cli ppiper/cf-cli:latest
-docker tag localhost:5000/ppiper/neo-cli ppiper/neo-cli:latest
 docker tag localhost:5000/ppiper/mta-archive-builder ppiper/mta-archive-builder:latest
 
-docker push localhost:5000/ppiper/jenkins-master:latest
-docker push localhost:5000/ppiper/cx-server-companion:latest
-docker push localhost:5000/ppiper/cf-cli:latest
-docker push localhost:5000/ppiper/neo-cli:latest
 docker push localhost:5000/ppiper/mta-archive-builder:latest
 
 # Boot our unit-under-test Jenkins master instance using the `cx-server` script
