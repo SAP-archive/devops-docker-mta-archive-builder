@@ -35,8 +35,6 @@ RUN apt-get update && \
          --output "${MTA_HOME}/LICENSE.txt" \
        https://tools.hana.ondemand.com/developer-license-3_1.txt && \
     ln -s "${MTA_HOME}/bin/mtaBuild.sh" /usr/local/bin/mtaBuild && \
-    INSTALLED_MTA_VERSION="$(mtaBuild --version)" && \
-    echo "[INFO] mta version: \"${INSTALLED_MTA_VERSION}\"." && \
     #
     # Install git
     #
@@ -51,8 +49,6 @@ RUN apt-get update && \
      |tar -xzv -f - -C "${NODE_HOME}" && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/node" /usr/local/bin/node && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npm" /usr/local/bin/npm && \
-    INSTALLED_NODE_VERSION="$(node --version)" && \
-    echo "[INFO] node version: \"${INSTALLED_NODE_VERSION}\"." && \
     #
     # Provide SAP registry
     #
@@ -67,8 +63,6 @@ RUN apt-get update && \
       | tar -xzvf - -C "${M2_BASE}" && \
     ln -s "${M2_HOME}/bin/mvn" /usr/local/bin/mvn && \
     chmod --recursive a+w ${M2_HOME}/conf/* && \
-    INSTALLED_MAVEN_VERSION=$(mvn -version |head -n1 |cut -d ' ' -f  3) && \
-    echo "[INFO] maven version: \"${INSTALLED_MAVEN_VERSION}\"." && \
     #
     # Install essential build tools and python, required for building db modules
     #
@@ -90,13 +84,7 @@ RUN apt-get update && \
             --user-group \
             --uid 1000 \
             --comment 'SAP-MTA tooling' \
-            --password $(echo weUseMta |openssl passwd -1 -stdin) mta && \
-    # Check below should be active, but we get version 1.1.8 installed
-    # when demanding version 1.1.7. When activating the check below, don't forget to add
-    # ' && \' to the line above
-    # [ "${MTA_VERSION}" = "${INSTALLED_MTA_VERSION}" ] || { echo "[ERROR] Installed mta version '${INSTALLED_MTA_VERSION}' does not match expected mta version '${MTA_VERSION}'."; exit 1; }
-   [ "${NODE_VERSION}" = "${INSTALLED_NODE_VERSION}" ] || { echo "[ERROR] Installed node version '${INSTALLED_NODE_VERSION}' does not match expected node version '${NODE_VERSION}'."; exit 1; } && \
-   [ "${MAVEN_VERSION}" = "${INSTALLED_MAVEN_VERSION}" ] || { echo "[ERROR] Installed maven version '${INSTALLED_MAVEN_VERSION}' does not match expected maven version '${MAVEN_VERSION}'."; exit 1; }
+            --password $(echo weUseMta |openssl passwd -1 -stdin) mta
 
 WORKDIR /project
 
