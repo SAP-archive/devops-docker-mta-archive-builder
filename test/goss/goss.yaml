@@ -1,0 +1,39 @@
+# GOSS Manual: https://github.com/aelsabbahy/goss/blob/master/docs/manual.md
+# CMD: GOSS_FILES_PATH=./test/goss dgoss run -i -v $PWD:/project ppiper/mta-archive-builder
+package:
+  git:
+    installed: true
+    versions:
+    - 1:2.11.0-3+deb9u4
+  python-minimal:
+    installed: true
+    versions:
+    - 2.7.13-2
+user:
+  mta:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+    - mta
+    home: /home/mta
+    shell: /bin/bash
+command:
+  mtaBuild --version:
+    exit-status: 0
+    stdout:
+    - 1.1.19
+    stderr: []
+    timeout: 10000
+  mvn --version:
+    exit-status: 0
+    stdout:
+    - Apache Maven 3.6.0
+    stderr: []
+    timeout: 10000
+  node --version:
+    exit-status: 0
+    stdout:
+    - v10.13.0
+    stderr: []
+    timeout: 10000
