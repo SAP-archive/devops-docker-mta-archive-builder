@@ -3,8 +3,10 @@
 # Start a local registry, to which we push the images built in this test, and from which they will be consumed in the test
 docker run -d -p 5000:5000 --restart always --name registry registry:2 || true
 
-docker build -t localhost:5000/ppiper/mta-archive-builder:latest .
-docker tag localhost:5000/ppiper/mta-archive-builder:latest ppiper/mta-archive-builder:latest
+docker build \
+  --tag localhost:5000/ppiper/mta-archive-builder:latest \
+  --tag ppiper/mta-archive-builder:latest \
+  .
 docker push localhost:5000/ppiper/mta-archive-builder:latest
 
 git clone https://github.com/piper-validation/cloud-s4-sdk-book.git -b validate-mta test-project
