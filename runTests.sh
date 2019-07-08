@@ -21,5 +21,6 @@ popd
 
 function cleanup {
   rm -rf test-project
+  docker rm --force registry
 }
 trap cleanup EXIT
