@@ -12,8 +12,6 @@ ENV MTA_JAR_LOCATION="${MTA_HOME}/lib/mta.jar"
 
 ENV M2_HOME=/opt/maven/apache-maven-${MAVEN_VERSION}
 
-ENV PYTHON /usr/bin/python2.7
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY scripts/mtaBuild.sh ${MTA_HOME}/bin/mtaBuild.sh
@@ -74,7 +72,7 @@ RUN apt-get update && \
     #
     apt-get install --yes --no-install-recommends \
       build-essential \
-      python2.7 && \
+      python-minimal && \
     #
     # Cleanup curl (was only needed for downloading artifacts)
     #
