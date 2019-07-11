@@ -1,3 +1,4 @@
+# CMD: docker-compose --file docker-compose.test.yml up
 version: '3'
 services:
   fetch-goss:
@@ -7,7 +8,6 @@ services:
     command: /bin/sh -c "curl -fsSL https://goss.rocks/install | GOSS_DST=/goss sh"
   sut:
     build: .
-    #image: ppiper/mta-archive-builder
     depends_on: 
       - fetch-goss
     volumes:
@@ -18,7 +18,7 @@ services:
       - /bin/sh
       - -c
       - |
-          # wait till dgoss is loaded
+          # wait till dgoss is loaded 
           until test -e /goss/dgoss; do sleep 2; done
           /goss/goss --gossfile goss.yaml validate
           # cleanup
