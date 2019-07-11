@@ -1,20 +1,27 @@
 version: '3'
 services:
-  sut: 
-    #build: .
-    image: 5899797fc3e8
-    #image: ppiper/mta-archive-builder
+  fetch-goss:
+    image: node:8-stretch
     volumes:
-      - ./test/goss:/goss-test
-    working_dir: /goss-test
-
+      - goss-executable:/goss
+    command: /bin/sh -c "curl -fsSL https://goss.rocks/install | GOSS_DST=/goss sh"
+  sut:
+    build: .
+    #image: ppiper/mta-archive-builder
+    depends_on: 
+      - fetch-goss
+    volumes:
+      - goss-executable:/goss
+      - ./test/goss:/tests
+    working_dir: /tests
     command:
       - /bin/sh
       - -c
       - |
-          mkdir .goss
-          curl -fsSL https://goss.rocks/install | GOSS_DST=.goss sh
-          .goss/goss --gossfile goss.yaml validate
+          # wait till dgoss is loaded
+          until test -e /goss/dgoss; do sleep 2; done
+          /goss/goss --gossfile goss.yaml validate
           # cleanup
-          rm -rf .goss .mta
-    #command: ".goss/goss --gossfile /goss-tests/goss.yaml validate"
+          rm -rf .mta
+volumes:
+  goss-executable:
