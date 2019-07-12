@@ -19,6 +19,11 @@ user:
     home: /home/mta
     shell: /bin/bash
 command:
+  mtaBuild --version:
+    exit-status: 0
+    stdout:
+    - 1.1.19
+    timeout: 10000
   mvn --version:
     exit-status: 0
     stdout:
