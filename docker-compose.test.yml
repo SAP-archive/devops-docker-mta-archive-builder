@@ -13,6 +13,7 @@ services:
     volumes:
       - .:/project
       - goss-executable:/goss
-    command: /goss/goss --gossfile test/goss/goss.yaml validate --format documentation --color
+    command: mtaBuild --version
+    #command: /goss/goss --gossfile test/goss/goss.yaml validate --format documentation --color
 volumes:
   goss-executable:
