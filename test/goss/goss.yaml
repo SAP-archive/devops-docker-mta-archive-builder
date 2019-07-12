@@ -19,6 +19,11 @@ user:
     home: /home/mta
     shell: /bin/bash
 command:
+  mtaBuild --version:
+    exit-status: 1
+    stdout:
+    - failed to clear directory .mta
+    timeout: 10000
   mvn --version:
     exit-status: 0
     stdout:
