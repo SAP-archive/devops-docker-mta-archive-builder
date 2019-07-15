@@ -1,3 +1,9 @@
 .idea
 .vscode
 *.DS_Store
+
+test/**/node_modules/
+test/**/.mta/
+test/**/dummy.mtar
+test/**/target/
+test/**/dist/
