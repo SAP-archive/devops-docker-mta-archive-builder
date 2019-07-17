@@ -1,6 +1,7 @@
 .idea
 .vscode
 *.DS_Store
+.mta/
 
 test/**/node_modules/
 test/**/.mta/
