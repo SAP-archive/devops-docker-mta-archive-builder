@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-slim
 
+# will be everybodys HOME on this image
 ARG MTA_USER_HOME=/home/mta
 ARG MTA_HOME='/opt/sap/mta'
 ARG MTA_VERSION=1.1.19
@@ -91,6 +92,8 @@ RUN apt-get update && \
             --uid 1000 \
             --comment 'SAP-MTA tooling' \
             --password $(echo weUseMta |openssl passwd -1 -stdin) mta && \
+    # allow anybody to write into the images HOME
+    chmod a+w "${MTA_USER_HOME}" && \
     # Check below should be active, but we get version 1.1.8 installed
     # when demanding version 1.1.7. When activating the check below, don't forget to add
     # ' && \' to the line above
@@ -101,5 +104,7 @@ RUN apt-get update && \
 WORKDIR /project
 
 ENV PATH=./node_modules/.bin:$PATH
+# anybodys HOME
+ENV HOME=${USER_HOME}
 
 USER mta
