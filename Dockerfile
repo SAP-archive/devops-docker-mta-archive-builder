@@ -93,6 +93,6 @@ WORKDIR /project
 
 ENV PATH=./node_modules/.bin:$PATH
 # anybodys HOME
-ENV HOME=${USER_HOME}
+ENV HOME=${MTA_USER_HOME}
 
 USER mta
