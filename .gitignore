@@ -1,7 +1,10 @@
 .idea
 .vscode
-infrastructure-tests/custom-environment.list
-infrastructure-tests/cx-server
-infrastructure-tests/jenkins-configuration/
-infrastructure-tests/server.cfg
 *.DS_Store
+.mta/
+
+test/**/node_modules/
+test/**/.mta/
+test/**/dummy.mtar
+test/**/target/
+test/**/dist/
