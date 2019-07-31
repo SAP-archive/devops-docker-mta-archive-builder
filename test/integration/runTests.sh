@@ -19,7 +19,7 @@ docker run \
   -e BRANCH_NAME=master \
   -e CASC_JENKINS_CONFIG=/workspace/jenkins.yml \
   -e HOST=$(hostname) \
-  ppiper/jenkinsfile-runner
+  ppiper/jenkinsfile-runner:latest-plugins
 
 popd
 
