@@ -57,7 +57,7 @@ RUN apt-get update && \
     # Install maven
     #
     echo "[INFO] installing maven." && \
-    M2_BASE="$(dirname \"${M2_HOME}\")" && \
+    M2_BASE="$(dirname ${M2_HOME})" && \
     mkdir -p "${M2_BASE}" && \
     curl --fail --silent --output - "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
       | tar -xzvf - -C "${M2_BASE}" && \
