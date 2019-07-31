@@ -11,8 +11,7 @@ docker push localhost:5000/ppiper/mta-archive-builder:latest
 
 git clone https://github.com/piper-validation/cloud-s4-sdk-book.git -b validate-mta test-project
 pushd test-project
-echo '@Library("piper-library-os@edc396c0cbc4c484a92b93850e773776f9ef50f1")' | cat - Jenkinsfile > temp && mv temp Jenkinsfile
-
+sed '1 a@Library("piper-library-os@edc396c0cbc4c484a92b93850e773776f9ef50f1")' Jenkinsfile
 
 docker run \
   -v //var/run/docker.sock:/var/run/docker.sock \
