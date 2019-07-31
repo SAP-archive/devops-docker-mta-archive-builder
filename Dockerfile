@@ -24,7 +24,7 @@ RUN apt-get update && \
     #
     # Install mta
     #
-    mkdir -p "$(dirname \"${MTA_JAR_LOCATION}\")" && \
+    mkdir -p "$(dirname ${MTA_JAR_LOCATION})" && \
     curl --fail \
          --silent \
          --cookie "eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt;" \
