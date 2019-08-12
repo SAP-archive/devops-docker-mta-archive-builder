@@ -24,7 +24,7 @@ RUN apt-get update && \
     #
     # Install mta
     #
-    mkdir -p $(dirname "${MTA_JAR_LOCATION}") && \
+    mkdir -p "$(dirname ${MTA_JAR_LOCATION})" && \
     curl --fail \
          --silent \
          --cookie "eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt;" \
@@ -62,7 +62,7 @@ RUN apt-get update && \
     curl --fail --silent --output - "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
       | tar -xzvf - -C "${M2_BASE}" && \
     ln -s "${M2_HOME}/bin/mvn" /usr/local/bin/mvn && \
-    chmod --recursive a+w ${M2_HOME}/conf/* && \
+    chmod --recursive a+w "${M2_HOME}"/conf/* && \
     #
     # Install essential build tools and python, required for building db modules
     #
@@ -84,7 +84,7 @@ RUN apt-get update && \
             --user-group \
             --uid 1000 \
             --comment 'SAP-MTA tooling' \
-            --password $(echo weUseMta |openssl passwd -1 -stdin) mta
+            --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta
 
 WORKDIR /project
 
