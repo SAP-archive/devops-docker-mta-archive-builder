@@ -16,3 +16,4 @@ services:
     command: /goss/goss --gossfile test/goss/goss.yaml validate --format documentation --color
 volumes:
   goss-executable:
+
