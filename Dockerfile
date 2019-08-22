@@ -49,6 +49,7 @@ RUN apt-get update && \
      |tar -xzv -f - -C "${NODE_HOME}" && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/node" /usr/local/bin/node && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npm" /usr/local/bin/npm && \
+    ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npx" /usr/local/bin/npx && \
     #
     # Provide SAP registry
     #
