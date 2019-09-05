@@ -23,7 +23,7 @@ command:
   mvn --version:
     exit-status: 0
     stdout:
-    - Apache Maven 3.6.0
+    - Apache Maven 3.6.2
     timeout: 10000
   node --version:
     exit-status: 0
