@@ -24,6 +24,8 @@ RUN apt-get update && \
     #
     # Install mta
     #
+    echo "[MHOLL]: MTA_JAR_LOCATION: ${MTA_JAR_LOCATION}" && \
+    dirname ${MTA_JAR_LOCATION} && \
     mkdir -p "$(dirname ${MTA_JAR_LOCATION})" && \
     curl --fail \
          --silent \
@@ -44,7 +46,7 @@ RUN apt-get update && \
     #
     # Install node
     #
-    NODE_HOME=/opt/nodejs; mkdir -p ${NODE_HOME} && \
+    NODE_HOME=/opt/nodejs; echo "[MHOLL] NODE_HOME: ${NODE_HOME}"; mkdir -p ${NODE_HOME} && \
     curl --fail --silent --output - "http://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz" \
      |tar -xzv -f - -C "${NODE_HOME}" && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/node" /usr/local/bin/node && \
@@ -59,6 +61,7 @@ RUN apt-get update && \
     #
     echo "[INFO] installing maven." && \
     M2_BASE="$(dirname ${M2_HOME})" && \
+    echo "[MHOLL] M2_BASE: ${M2_BASE}" && \
     mkdir -p "${M2_BASE}" && \
     curl --fail --silent --output - "https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
       | tar -xzvf - -C "${M2_BASE}" && \
