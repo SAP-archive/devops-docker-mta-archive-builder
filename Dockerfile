@@ -9,7 +9,7 @@ ARG NODE_VERSION=v10.13.0
 ARG MAVEN_VERSION=3.6.2
 
 ENV MTA_JAR_LOCATION="${MTA_HOME}/lib/mta.jar"
-
+ENV NODE_HOME=/opt/nodejs
 ENV M2_HOME=/opt/maven/apache-maven-${MAVEN_VERSION}
 
 ENV PYTHON /usr/bin/python2.7
@@ -46,7 +46,7 @@ RUN apt-get update && \
     #
     # Install node
     #
-    NODE_HOME=/opt/nodejs; echo "[MHOLL] NODE_HOME: ${NODE_HOME}"; mkdir -p ${NODE_HOME} && \
+    echo "[MHOLL] NODE_HOME: ${NODE_HOME}"; mkdir -p ${NODE_HOME} && \
     curl --fail --silent --output - "http://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz" \
      |tar -xzv -f - -C "${NODE_HOME}" && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/node" /usr/local/bin/node && \
