@@ -22,7 +22,9 @@ This will build an `mtar` file for SAP Cloud Platform (Neo). The folder containi
 
 # How to build this image
 
-`docker build -t ppiper/mta-archive-builder .`
+```
+docker build -t ppiper/mta-archive-builder .
+```
 
 ## This image provides:
 
