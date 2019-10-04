@@ -85,10 +85,13 @@ RUN apt-get update && \
             --user-group \
             --uid 1000 \
             --comment 'SAP-MTA tooling' \
-            --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta
+            --password "$(echo weUseMta |openssl passwd -1 -stdin)" mta && \
+    # allow anybody to write into the images HOME
+    chmod a+w "${MTA_USER_HOME}" 
 
 WORKDIR /project
 
 ENV PATH=./node_modules/.bin:$PATH
+ENV HOME=${MTA_USER_HOME}
 
 USER mta
