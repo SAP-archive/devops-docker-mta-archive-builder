@@ -3,12 +3,8 @@
 package:
   git:
     installed: true
-    versions:
-    - 1:2.11.0-3+deb9u4
   python2.7:
     installed: true
-    versions:
-    - 2.7.13-2+deb9u3
 user:
   mta:
     exists: true
@@ -20,14 +16,14 @@ user:
     shell: /bin/bash
 command:
   mtaBuild --version:
-    exit-status: 0
+    exit-status: 1
     stdout:
-    - 1.1.19
+    - failed to clear directory .mta
     timeout: 10000
   mvn --version:
     exit-status: 0
     stdout:
-    - Apache Maven 3.6.0
+    - Apache Maven 3.6.2
     timeout: 10000
   node --version:
     exit-status: 0
