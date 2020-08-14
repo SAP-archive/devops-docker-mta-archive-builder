@@ -26,11 +26,11 @@ RUN set -x  && \
     # Install mta
     #
     mkdir -p "$(dirname ${MTA_JAR_LOCATION})" && \
-    curl \
+    curl --fail --silent \
          --cookie "eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt;" \
          --output "${MTA_JAR_LOCATION}" \
       "https://tools.hana.ondemand.com/additional/mta_archive_builder-${MTA_VERSION}.jar" && \
-    curl \
+    curl  --fail --silent \
          --output "${MTA_HOME}/LICENSE.txt" \
        https://tools.hana.ondemand.com/developer-license-3_1.txt && \
     ln -s "${MTA_HOME}/bin/mtaBuild.sh" /usr/local/bin/mtaBuild && \
@@ -44,7 +44,7 @@ RUN set -x  && \
     # Install node
     #
     NODE_HOME=/opt/nodejs; mkdir -p ${NODE_HOME} && \
-    curl -L "http://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz" | tar -zx -C "${NODE_HOME}" && \
+    curl --fail --silent --location "http://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz" | tar -zx -C "${NODE_HOME}" && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/node" /usr/local/bin/node && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npm" /usr/local/bin/npm && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npx" /usr/local/bin/npx && \
@@ -58,7 +58,7 @@ RUN set -x  && \
     echo "[INFO] installing maven." && \
     M2_BASE="$(dirname ${M2_HOME})" && \
     mkdir -p "${M2_BASE}" && \
-    curl -L "https://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | tar -xz -C "${M2_BASE}" && \
+    curl --fail --silent --location "https://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" | tar -xz -C "${M2_BASE}" && \
     ln -s "${M2_HOME}/bin/mvn" /usr/local/bin/mvn && \
     chmod --recursive a+w "${M2_HOME}"/conf/* && \
     #
