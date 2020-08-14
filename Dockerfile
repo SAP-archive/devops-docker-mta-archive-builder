@@ -18,7 +18,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY src/shell/mtaBuild.sh ${MTA_HOME}/bin/mtaBuild.sh
 
-RUN apt-get update && \
+RUN set -x; apt-get update && \
     apt-get install --yes --no-install-recommends \
       curl && \
     #
