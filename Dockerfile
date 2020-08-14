@@ -51,10 +51,6 @@ RUN apt-get update && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npm" /usr/local/bin/npm && \
     ln -s "${NODE_HOME}/node-${NODE_VERSION}-linux-x64/bin/npx" /usr/local/bin/npx && \
     #
-    # Provide SAP registry
-    #
-    npm config set @sap:registry https://npm.sap.com --global && \
-    #
     # Install maven
     #
     echo "[INFO] installing maven." && \
