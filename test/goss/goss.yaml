@@ -23,12 +23,12 @@ command:
   mvn --version:
     exit-status: 0
     stdout:
-    - Apache Maven 3.6.2
+    - Apache Maven 3.6.3
     timeout: 10000
   node --version:
     exit-status: 0
     stdout:
-    - v10.13.0
+    - v10.22.0
     timeout: 10000
   curl --version:
     exit-status: 127
