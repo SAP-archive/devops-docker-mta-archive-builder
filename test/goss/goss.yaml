@@ -38,8 +38,3 @@ command:
     stdout:
     - https://registry.npmjs.org/
     timeout: 10000
-  npm config get @sap:registry:
-    exit-status: 0
-    stdout:
-    - https://npm.sap.com
-    timeout: 10000
